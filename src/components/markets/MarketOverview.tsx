@@ -1,5 +1,5 @@
 // components/markets/MarketOverview.tsx - 카테고리별 자산 카드 그리드
-// v1.3.0 | 2026-02-17
+// v1.4.0 | 2026-02-17
 
 'use client';
 
@@ -56,7 +56,7 @@ export function MarketOverview() {
       {SECTIONS.map((section) => {
         const assets = grouped?.get(section.category);
 
-        // 암호화폐: BTC, ETH 카드 + 컴팩트 패널
+        // 암호화폐: BTC, ETH, ETH/BTC 차트 카드 + 하단 메트릭 패널
         if (section.category === 'crypto') {
           const chartAssets = assets?.filter((a) => !METRIC_SYMBOLS.includes(a.symbol));
           const allAssets = assets ?? [];
@@ -69,27 +69,35 @@ export function MarketOverview() {
                   {section.label}
                 </h3>
               </div>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+
+              {/* 상단: BTC, ETH, ETH/BTC 차트 카드 */}
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                 {isLoading ? (
                   <>
                     <AssetCardSkeleton />
                     <AssetCardSkeleton />
-                    <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-gray-800 bg-gray-800">
-                      {Array.from({ length: 4 }).map((_, i) => (
-                        <div key={i} className="bg-[#111827] px-4 py-3">
-                          <Skeleton className="mb-1 h-3 w-16" />
-                          <Skeleton className="h-5 w-14" />
-                        </div>
-                      ))}
-                    </div>
+                    <AssetCardSkeleton />
                   </>
                 ) : (
-                  <>
-                    {chartAssets?.map((asset) => (
-                      <AssetCard key={asset.symbol} asset={asset} />
+                  chartAssets?.map((asset) => (
+                    <AssetCard key={asset.symbol} asset={asset} />
+                  ))
+                )}
+              </div>
+
+              {/* 하단: BTC.D, USDT.D, KIMP, CBP 메트릭 */}
+              <div className="mt-3">
+                {isLoading ? (
+                  <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-gray-800 bg-gray-800 sm:grid-cols-4">
+                    {Array.from({ length: 4 }).map((_, i) => (
+                      <div key={i} className="bg-[#111827] px-4 py-3">
+                        <Skeleton className="mb-1 h-3 w-16" />
+                        <Skeleton className="h-5 w-14" />
+                      </div>
                     ))}
-                    <CryptoMetricsPanel assets={allAssets} />
-                  </>
+                  </div>
+                ) : (
+                  <CryptoMetricsPanel assets={allAssets} />
                 )}
               </div>
             </div>

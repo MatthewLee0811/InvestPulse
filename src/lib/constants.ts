@@ -22,6 +22,7 @@ export const ASSETS: AssetConfig[] = [
   // 암호화폐 (CoinGecko용 ID)
   { symbol: 'BTC', yahooSymbol: 'BTC-USD', name: 'Bitcoin', nameKo: '비트코인', category: 'crypto' },
   { symbol: 'ETH', yahooSymbol: 'ETH-USD', name: 'Ethereum', nameKo: '이더리움', category: 'crypto' },
+  { symbol: 'ETHBTC', yahooSymbol: '', name: 'ETH/BTC', nameKo: 'ETH/BTC', category: 'crypto' },
   { symbol: 'BTC.D', yahooSymbol: '', name: 'BTC Dominance', nameKo: 'BTC 도미넌스', category: 'crypto' },
   { symbol: 'USDT.D', yahooSymbol: '', name: 'USDT Dominance', nameKo: 'USDT 도미넌스', category: 'crypto' },
   { symbol: 'KIMP', yahooSymbol: '', name: 'Tether Kimchi Premium', nameKo: '테더 김프', category: 'crypto' },

@@ -20,6 +20,7 @@ interface AssetCardProps {
 export function AssetCard({ asset }: AssetCardProps) {
   const isDominance = asset.symbol === 'BTC.D' || asset.symbol === 'USDT.D';
   const isPremium = asset.symbol === 'KIMP' || asset.symbol === 'CBP';
+  const isRatio = asset.symbol === 'ETHBTC';
   const isPercentOnly = isDominance || isPremium;
   const isPositive = asset.changePercent >= 0;
   const isNeutral = asset.changePercent === 0;
@@ -48,11 +49,13 @@ export function AssetCard({ asset }: AssetCardProps) {
         <span className={`font-mono text-lg font-bold ${isPremium ? (asset.price >= 0 ? 'text-emerald-400' : 'text-red-400') : 'text-white'}`}>
           {isPercentOnly
             ? `${asset.price >= 0 && isPremium ? '+' : ''}${asset.price.toFixed(2)}%`
-            : asset.category === 'forex' && asset.symbol === 'USDKRW'
-              ? `₩${formatNumber(asset.price)}`
-              : asset.category === 'bond'
-                ? `${formatNumber(asset.price)}%`
-                : `$${formatNumber(asset.price)}`}
+            : isRatio
+              ? formatNumber(asset.price, 5)
+              : asset.category === 'forex' && asset.symbol === 'USDKRW'
+                ? `₩${formatNumber(asset.price)}`
+                : asset.category === 'bond'
+                  ? `${formatNumber(asset.price)}%`
+                  : `$${formatNumber(asset.price)}`}
         </span>
       </div>
 
@@ -63,7 +66,7 @@ export function AssetCard({ asset }: AssetCardProps) {
         <div className={`mb-3 flex items-center gap-1 text-sm ${changeColor}`}>
           <span className="font-mono">
             {asset.change >= 0 ? '+' : ''}
-            {formatNumber(asset.change)}
+            {isRatio ? formatNumber(asset.change, 5) : formatNumber(asset.change)}
           </span>
           <span className={`rounded px-1 py-0.5 font-mono text-xs ${changeBg}`}>
             {formatChangePercent(asset.changePercent)}

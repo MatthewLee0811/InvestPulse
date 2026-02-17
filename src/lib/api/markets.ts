@@ -304,6 +304,47 @@ export async function fetchAllMarkets(): Promise<AssetData[]> {
     }
   }
 
+  // ETH/BTC 비율 계산 (BTC, ETH 데이터가 확정된 시점에서 산출)
+  const btcAsset = yahooData.get('BTC');
+  const ethAsset = yahooData.get('ETH');
+  const ethbtcConfig = ASSETS.find((a) => a.symbol === 'ETHBTC');
+
+  if (btcAsset && ethAsset && ethbtcConfig && btcAsset.price > 0) {
+    const ethbtcPrice = ethAsset.price / btcAsset.price;
+
+    // 24시간 전 가격으로 변동률 계산
+    const btcPrev = btcAsset.price - btcAsset.change;
+    const ethPrev = ethAsset.price - ethAsset.change;
+    const prevRatio = btcPrev > 0 ? ethPrev / btcPrev : ethbtcPrice;
+
+    const ethbtcChange = ethbtcPrice - prevRatio;
+    const ethbtcChangePercent =
+      prevRatio > 0 ? ((ethbtcPrice / prevRatio) - 1) * 100 : 0;
+
+    // 스파크라인: BTC/ETH 각각의 sparkline에서 비율 산출
+    const ethbtcSparkline: number[] = [];
+    if (btcAsset.sparkline.length > 0 && ethAsset.sparkline.length > 0) {
+      const minLen = Math.min(btcAsset.sparkline.length, ethAsset.sparkline.length);
+      for (let i = 0; i < minLen; i++) {
+        if (btcAsset.sparkline[i] > 0) {
+          ethbtcSparkline.push(ethAsset.sparkline[i] / btcAsset.sparkline[i]);
+        }
+      }
+    }
+
+    yahooData.set('ETHBTC', {
+      symbol: 'ETHBTC',
+      name: ethbtcConfig.name,
+      nameKo: ethbtcConfig.nameKo,
+      category: 'crypto',
+      price: ethbtcPrice,
+      change: ethbtcChange,
+      changePercent: ethbtcChangePercent,
+      sparkline: ethbtcSparkline,
+      updatedAt: new Date().toISOString(),
+    });
+  }
+
   // sparkline 데이터 병합
   for (const [symbol, prices] of sparklines) {
     const existing = yahooData.get(symbol);

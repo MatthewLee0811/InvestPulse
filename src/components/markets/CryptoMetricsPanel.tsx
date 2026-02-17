@@ -1,5 +1,5 @@
 // components/markets/CryptoMetricsPanel.tsx - 도미넌스/프리미엄 컴팩트 패널
-// v1.0.0 | 2026-02-17
+// v1.2.0 | 2026-02-17
 
 'use client';
 
@@ -32,7 +32,7 @@ export function CryptoMetricsPanel({ assets }: CryptoMetricsPanelProps) {
   if (metrics.length === 0) return null;
 
   return (
-    <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-gray-800 bg-gray-800">
+    <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-gray-800 bg-gray-800 sm:grid-cols-4">
       {metrics.map((m) => (
         <div
           key={m.symbol}

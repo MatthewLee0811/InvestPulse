@@ -92,6 +92,20 @@ export interface SummaryApiResponse {
   updatedAt: string;
 }
 
+// 뉴스 번역/요약
+export interface NewsSummaryResult {
+  translatedHeadline: string;
+  koreanSummary: string;
+  provider: 'gemini' | 'openai';
+  cached: boolean;
+}
+
+export interface NewsSummarizeResponse {
+  success: boolean;
+  data?: NewsSummaryResult;
+  error?: string;
+}
+
 export type CalendarTab = 'this_week' | 'this_month' | 'next_month';
 export type NewsTab = 'today' | 'this_week' | 'this_month';
 export type AssetCategory = AssetData['category'];

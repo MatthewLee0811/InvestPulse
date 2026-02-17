@@ -82,6 +82,7 @@ export const CACHE_TTL = {
   NEWS: 15 * 60 * 1000,           // 15분
   FEAR_GREED: 60 * 60 * 1000,     // 1시간 (하루 1회 업데이트)
   SUMMARY: 10 * 60 * 1000,        // 10분
+  NEWS_SUMMARY: 24 * 60 * 60 * 1000, // 24시간 (번역/요약 캐시)
 } as const;
 
 // React Query 설정
@@ -115,4 +116,5 @@ export const API_ENDPOINTS = {
   NEWS: '/api/news',
   FEAR_GREED: '/api/fear-greed',
   SUMMARY: '/api/summary',
+  NEWS_SUMMARIZE: '/api/news/summarize',
 } as const;

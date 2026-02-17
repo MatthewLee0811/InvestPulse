@@ -119,63 +119,54 @@ export async function fetchAllNews(): Promise<NewsItem[]> {
   });
 }
 
-/** API 키 없을 때 Mock 데이터 */
+/** API 키 없을 때 Mock 데이터 (FINNHUB_API_KEY 설정 시 실제 기사 링크 제공) */
 function getMockNewsData(): NewsItem[] {
   const now = Date.now();
   return [
     {
       id: 'mock-1',
-      headline: 'Fed Signals Potential Rate Cut in Coming Months',
-      summary: 'Federal Reserve officials hinted at possible rate cuts as inflation shows signs of cooling down.',
-      source: 'Reuters',
-      url: 'https://reuters.com',
+      headline: '[샘플] Fed Signals Potential Rate Cut in Coming Months',
+      summary: 'FINNHUB_API_KEY를 설정하면 실제 뉴스 기사와 링크가 표시됩니다.',
+      source: 'Mock',
+      url: 'https://finnhub.io/register',
       publishedAt: new Date(now - 1 * 60 * 60 * 1000).toISOString(),
       category: 'fed_policy',
     },
     {
       id: 'mock-2',
-      headline: 'S&P 500 Hits New All-Time High Amid Tech Rally',
-      summary: 'Major tech stocks drove the index to record levels as earnings beat expectations.',
-      source: 'CNBC',
-      url: 'https://cnbc.com',
+      headline: '[샘플] S&P 500 Hits New All-Time High Amid Tech Rally',
+      summary: 'FINNHUB_API_KEY를 설정하면 실제 뉴스 기사와 링크가 표시됩니다.',
+      source: 'Mock',
+      url: 'https://finnhub.io/register',
       publishedAt: new Date(now - 2 * 60 * 60 * 1000).toISOString(),
       category: 'market',
     },
     {
       id: 'mock-3',
-      headline: 'Bitcoin Surges Past $100K on Institutional Demand',
-      summary: 'Institutional investors continue to pour money into Bitcoin ETFs.',
-      source: 'CoinDesk',
-      url: 'https://coindesk.com',
+      headline: '[샘플] Bitcoin Surges Past $100K on Institutional Demand',
+      summary: 'FINNHUB_API_KEY를 설정하면 실제 뉴스 기사와 링크가 표시됩니다.',
+      source: 'Mock',
+      url: 'https://finnhub.io/register',
       publishedAt: new Date(now - 3 * 60 * 60 * 1000).toISOString(),
       category: 'crypto',
     },
     {
       id: 'mock-4',
-      headline: 'Gold Prices Rise as Dollar Weakens',
-      summary: 'Gold futures climbed as the US dollar index declined following economic data release.',
-      source: 'Bloomberg',
-      url: 'https://bloomberg.com',
+      headline: '[샘플] Gold Prices Rise as Dollar Weakens',
+      summary: 'FINNHUB_API_KEY를 설정하면 실제 뉴스 기사와 링크가 표시됩니다.',
+      source: 'Mock',
+      url: 'https://finnhub.io/register',
       publishedAt: new Date(now - 5 * 60 * 60 * 1000).toISOString(),
       category: 'commodity',
     },
     {
       id: 'mock-5',
-      headline: 'US GDP Growth Exceeds Expectations at 3.2%',
-      summary: 'The US economy grew at a faster-than-expected pace in the latest quarter.',
-      source: 'WSJ',
-      url: 'https://wsj.com',
+      headline: '[샘플] US GDP Growth Exceeds Expectations at 3.2%',
+      summary: 'FINNHUB_API_KEY를 설정하면 실제 뉴스 기사와 링크가 표시됩니다.',
+      source: 'Mock',
+      url: 'https://finnhub.io/register',
       publishedAt: new Date(now - 8 * 60 * 60 * 1000).toISOString(),
       category: 'economy',
-    },
-    {
-      id: 'mock-6',
-      headline: 'Oil Prices Surge on OPEC+ Supply Cut Extension',
-      summary: 'OPEC+ members agreed to extend production cuts, pushing crude oil prices higher.',
-      source: 'Reuters',
-      url: 'https://reuters.com',
-      publishedAt: new Date(now - 12 * 60 * 60 * 1000).toISOString(),
-      category: 'commodity',
     },
   ];
 }

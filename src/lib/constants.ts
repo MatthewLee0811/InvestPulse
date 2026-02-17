@@ -80,6 +80,8 @@ export const CACHE_TTL = {
   MARKETS_CLOSED: 30 * 60 * 1000, // 30분 (장 마감 후)
   CALENDAR: 60 * 60 * 1000,       // 1시간
   NEWS: 15 * 60 * 1000,           // 15분
+  FEAR_GREED: 60 * 60 * 1000,     // 1시간 (하루 1회 업데이트)
+  SUMMARY: 10 * 60 * 1000,        // 10분
 } as const;
 
 // React Query 설정
@@ -96,6 +98,14 @@ export const QUERY_CONFIG = {
     staleTime: 10 * 60 * 1000,
     refetchInterval: 15 * 60 * 1000,
   },
+  FEAR_GREED: {
+    staleTime: 30 * 60 * 1000,
+    refetchInterval: 60 * 60 * 1000,
+  },
+  SUMMARY: {
+    staleTime: 5 * 60 * 1000,
+    refetchInterval: 10 * 60 * 1000,
+  },
 } as const;
 
 // API 엔드포인트
@@ -103,4 +113,6 @@ export const API_ENDPOINTS = {
   MARKETS: '/api/markets',
   CALENDAR: '/api/calendar',
   NEWS: '/api/news',
+  FEAR_GREED: '/api/fear-greed',
+  SUMMARY: '/api/summary',
 } as const;

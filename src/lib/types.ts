@@ -52,6 +52,46 @@ export interface NewsApiResponse {
   updatedAt: string;
 }
 
+// 시장 상태
+export type MarketStatusType = 'open' | 'pre_market' | 'after_market' | 'closed';
+
+export interface MarketStatus {
+  id: string;
+  name: string;
+  flag: string;
+  status: MarketStatusType;
+  statusLabel: string;
+  timeLabel: string; // "개장까지 5시간 13분" 등
+}
+
+// Fear & Greed
+export interface FearGreedData {
+  value: number;
+  label: string;          // "Greed", "Fear" 등
+  labelKo: string;        // "탐욕", "공포" 등
+  timestamp: string;
+  previousValue?: number;
+  previousLabel?: string;
+}
+
+export interface FearGreedApiResponse {
+  data: FearGreedData;
+  updatedAt: string;
+}
+
+// 시장 요약
+export interface MarketSummaryData {
+  text: string;
+  events: string;
+  sentiment: string;
+  date: string;
+}
+
+export interface SummaryApiResponse {
+  data: MarketSummaryData;
+  updatedAt: string;
+}
+
 export type CalendarTab = 'this_week' | 'this_month' | 'next_month';
 export type NewsTab = 'today' | 'this_week' | 'this_month';
 export type AssetCategory = AssetData['category'];

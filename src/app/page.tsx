@@ -1,5 +1,5 @@
 // app/page.tsx - 메인 대시보드 페이지
-// v1.0.0 | 2026-02-17
+// v1.1.0 | 2026-02-17
 
 'use client';
 
@@ -7,6 +7,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useState, useCallback } from 'react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { MarketStatusBar } from '@/components/market-status/MarketStatusBar';
+import { MarketSummary } from '@/components/summary/MarketSummary';
 import { MarketOverview } from '@/components/markets/MarketOverview';
 import { EconomicCalendar } from '@/components/calendar/EconomicCalendar';
 import { NewsFeed } from '@/components/news/NewsFeed';
@@ -34,7 +36,13 @@ export default function Home() {
       />
 
       <main className="mx-auto w-full max-w-7xl flex-1">
-        {/* 상단: 자산 카드 그리드 */}
+        {/* 최상단: 시장 상태 바 + Fear & Greed */}
+        <MarketStatusBar />
+
+        {/* 시장 요약 */}
+        <MarketSummary />
+
+        {/* 자산 카드 그리드 */}
         <MarketOverview />
 
         {/* 하단: 경제 일정 + 뉴스 2컬럼 */}

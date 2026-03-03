@@ -3,7 +3,7 @@
 
 'use client';
 
-import { useMemo } from 'react';
+import { useId, useMemo } from 'react';
 import { ResponsiveContainer, AreaChart, Area, YAxis } from 'recharts';
 
 interface SparklineChartProps {
@@ -12,6 +12,7 @@ interface SparklineChartProps {
 }
 
 export function SparklineChart({ data, positive }: SparklineChartProps) {
+  const id = useId();
   const { chartData, domain } = useMemo(() => {
     if (data.length < 2) return { chartData: [], domain: [0, 0] as [number, number] };
 
@@ -34,7 +35,7 @@ export function SparklineChart({ data, positive }: SparklineChartProps) {
   }
 
   const color = positive ? '#10b981' : '#ef4444';
-  const gradientId = `gradient-${positive ? 'up' : 'down'}-${Math.random().toString(36).slice(2, 6)}`;
+  const gradientId = `gradient-${positive ? 'up' : 'down'}-${id.replace(/:/g, '')}`;
 
   return (
     <div className="h-12 w-full">

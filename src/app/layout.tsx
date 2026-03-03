@@ -2,19 +2,8 @@
 // v1.0.0 | 2026-02-17
 
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 import { QueryProvider } from '@/components/QueryProvider';
 import './globals.css';
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
 
 export const metadata: Metadata = {
   title: 'InvestPulse - 투자 대시보드',
@@ -37,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-[#0a0f1c] font-sans text-gray-100 antialiased`}
+        className="bg-[#0a0f1c] font-sans text-gray-100 antialiased"
       >
         <QueryProvider>{children}</QueryProvider>
       </body>
